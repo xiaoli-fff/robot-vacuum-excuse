@@ -24,15 +24,19 @@ const LINE =
 const MIN_ENTRY_CHARS = 1;
 const MAX_ENTRY_CHARS = 120;
 
-if (
-  LINE.length < MIN_ENTRY_CHARS ||
-  LINE.length > MAX_ENTRY_CHARS ||
-  LINE.trim().length === 0
-) {
-  throw new Error(
-    `entry line must be ${MIN_ENTRY_CHARS}-${MAX_ENTRY_CHARS} characters, got ${LINE.length}`,
-  );
+function validateEntry(line: string): void {
+  if (
+    line.length < MIN_ENTRY_CHARS ||
+    line.length > MAX_ENTRY_CHARS ||
+    line.trim().length === 0
+  ) {
+    throw new Error(
+      `entry line must be ${MIN_ENTRY_CHARS}-${MAX_ENTRY_CHARS} characters, got ${line.length}`,
+    );
+  }
 }
+
+validateEntry(LINE);
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(outDir, { recursive: true });
